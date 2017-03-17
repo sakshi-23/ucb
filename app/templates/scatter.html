@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block options %}
+    <li>X:<input list="paramOption" name="param" id ="xParam" type="text" value="Certificates_count">
+    Y:<input list="paramOption" name="param" id ="yParam" type="text" value="Awards_count">
+        </li>
+   <!--<li>-->
+        <!--Threshold <input id="threshold" type="number" value="4">-->
+   <!--</li>-->
+  <!--<li>-->
+      <!--<div class="dropdown">-->
+          <!--<button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Similarity-->
+          <!--<span class="caret"></span></button>-->
+          <!--<ul class="dropdown-menu">-->
+              <!--<li><a href="#">Certificates_count</a><input id="Certificates_count" type="number"></li>-->
+              <!--<li><a href="#">Publications_count</a><input id="Pubs_count" type="number"></li>-->
+              <!--<li><a href="#">Awards_count</a><input id="Awards_count" type="number"></li>-->
+              <!--<li><a href="#">Grants_count</a><input id="Grants_count" type="number"></li>-->
+              <!--<li><a href="#">Memberships_count</a><input id="Memberships_count" type="number"></li>-->
+              <!--<li><a href="#">City</a><input id="City" type="number"></li>-->
+              <!--<li><a href="#">State</a><input id="State" type="number"></li>-->
+              <!--<li><a href="#">Current Hospital</a><input id="Current_hospital" type="number"></li>-->
+          <!--</ul>-->
+      <!--</div>-->
+      <!--<button id="update" class="btn btn-xs">Update</button>-->
+  <!--</li>-->
+
+{% endblock %}
+
+{% block layout_content %}
+     <div class="grid">
+    <svg ></svg>
+         </div>
+
+ <datalist id="paramOption">
+         <option value="KOL_Classification">
+        <option value="State">
+        <option value="Pubs_count">
+        <option value="Awards_count">
+        <option value="Certificates_count">
+        <option value="Grants_count">
+        <option value="Memberships_count">
+    </datalist>
+{% endblock %}
+{% block script_content %}
+     <script type="text/javascript" src="{{ url_for('static', filename='js/scatter.js') }}"></script>
+{% endblock %}
+
+{% block d3 %}
+ <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+{% endblock %}

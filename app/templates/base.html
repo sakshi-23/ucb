@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+  rel="stylesheet" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='design/custom.css')}}">
+</head>
+
+ <body onunload="" class="nav-sm">
+    <input type="hidden" id="refresh" value="no">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <span class="site_title"><span>Detail View</span></span>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu"></div>
+          </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav ">
+                  <li class="title-page">Physician 360</li>
+                <li class="">
+                    Search<input list="searchOption" id="searchText" type="text" >
+                </li>
+
+                <li>
+                    Limit <input id="limit" type="number" value="500">
+                </li>
+              <li>
+                Color:<input list="highlightOption" name="browser" id ="colorText" type="text" >
+            </li>
+
+                <li>
+                    Highlight:
+                    <input list="highlightOption" id="highlightText" type="text" >
+                </li>
+
+                 {% block options %}{% endblock %}
+                   <li>
+                    <select id="select-view">
+                        <option value="graphview">Graphview</option>
+                        <option value="gridview">Gridview</option>
+                        <option value="scatterview">Scatterview</option>
+                    </select>
+                </li>
+
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 1714px;">
+          <!-- top tiles -->
+          <div class="row tile_count">
+            <div id="count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Physicians</span>
+              <div class="count physician-details"></div>
+            </div>
+            <div id="Top_100_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top  physician-details" data-attr="Top_100:Yes"><i class="fa fa-user"></i> Top 100</span>
+              <div class="count"></div>
+            </div>
+            <div id="KOL_national_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top physician-details" data-attr="KOL_Classification:National"><i class="fa fa-user"></i> National KOL</span>
+              <div class="count"></div>
+            </div>
+            <div id="KOL_regional_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top physician-details " data-attr="KOL_Classification:Regional"><i class="fa fa-user"></i> Regional KOL</span>
+              <div class="count "></div>
+            </div>
+              <div id="KOL_local_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top physician-details" data-attr="KOL_Classification:Local"><i class="fa fa-user"></i> Local KOL</span>
+              <div class="count "></div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count right-tile">
+                <button class="btn-xs btn filter-selected">Filter highlighted</button>
+                <div class="legend"></div>
+
+            </div>
+          </div>
+            <div class="row">
+               {% block layout_content %}{% endblock %}
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div >
+             Project in collaboration <a href="http://entsci.gatech.edu/">http://entsci.gatech.edu/</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    <div class="loader" ></div>
+    <script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/jscroll.min.js')}}"></script>
+    {% block d3 %}{% endblock %}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='design/custom.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block script_content %}{% endblock %}
+    <datalist id="highlightOption">
+         <option value="KOL_Classification">
+        <option value="State">
+        <option value="Pubs_count">
+        <option value="Awards_count">
+        <option value="Certificates_count">
+        <option value="Grants_count">
+        <option value="Memberships_count">
+    </datalist>
+    <datalist id="searchOption">
+    <option value="Address">
+        <option value="Alignment_for_Partnership">
+        <option value="Awards_count">
+        <option value="BRV_N_1">
+        <option value="BRV_OL_Investigator">
+        <option value="Certificates_count">
+        <option value="City">
+        <option value="Current_MSL">
+        <option value="Disease_State">
+        <option value="Education">
+        <option value="Elderly">
+        <option value="First_Name">
+        <option value="Grants_count">
+        <option value="Hospital">
+        <option value="Interaction_MSL">
+        <option value="KOL_Classification">
+        <option value="Last_Name">
+        <option value="MSL">
+        <option value="Memberships_count">
+        <option value="Name">
+        <option value="Organization">
+        <option value="Pubs_count">
+        <option value="Reason_for_Unalignment">
+        <option value="Social_Media_Presence">
+        <option value="Specialty">
+        <option value="Strategic_Designation">
+        <option value="Tel">
+        <option value="Territory">
+        <option value="Top_100">
+        <option value="Zip">
+        <option value="city">
+        <option value="state"></option>
+    </datalist>
+</body>

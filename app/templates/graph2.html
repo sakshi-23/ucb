@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.18.1/vis.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+    <div>
+        Search<input id="searchText" type="text" style='margin:10px;width: 30%;'>
+        Limit <input id="limit" type="number" value="1000">
+        Threshold <input id="threshold" type="number" value="2">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Similarity params & weights
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+              <li><a href="#">Certificates_count</a><input id="Certificates_count" type="number"></li>
+              <li><a href="#">Publications_count</a><input id="Pubs_count" type="number"></li>
+              <li><a href="#">Awards_count</a><input id="Awards_count" type="number"></li>
+              <li><a href="#">Grants_count</a><input id="Grants_count" type="number"></li>
+              <li><a href="#">Memberships_count</a><input id="Memberships_count" type="number"></li>
+              <li><a href="#">City</a><input id="City" type="number"></li>
+              <li><a href="#">State</a><input id="State" type="number"></li>
+              <li><a href="#">Current Hospital</a><input id="Current_hospital" type="number"></li>
+          </ul>
+        </div>
+         <button id="submit">Update</button>
+        Color:
+        <select>
+            <option value="State">State</option>
+            <option value="City">City</option>
+            <option value="Pubs_count">Publications</option>
+            <option value="Awards_count">Awards</option>
+            <option value="Certificates_count">Certificate</option>
+            <option value="Grants_count">Grants</option>
+            <option value="Memberships_count">Memberships</option>
+        </select>
+
+
+    </div>
+    <div style="font-size: 12px;">
+        'Address', 'Awards', 'Awards_count', 'Certificates', 'Certificates_count', 'City', 'Education', 'Fellowship', 'Grants', 'Grants_count', 'Hospital', 'Location', 'Medical School', 'Memberships', 'Memberships_count', 'Name', 'Other Training', 'Post Doctoral Fellowship', 'Pubs', 'Pubs_count', 'Residency', 'Similar', 'SimilarURI', 'State', 'Tel', 'URL', '_id', 'fullname', 'npi'
+    </div>
+    <div id="mynetwork" ></div>
+    <script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/d3.v4.js')}}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/graph.js') }}"></script>
+</body>
+
+
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+  rel="stylesheet" >
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='design/custom.css')}}">
+</head>
+
+ <body class="nav-sm">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <span class="site_title"><span>Detail View</span></span>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <br>
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu"></div>
+
+            <!-- /sidebar menu -->
+
+           </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav ">
+                  <li class="title-page">Physician 360</li>
+                <li class="">
+                    Search<input list="searchOption" id="searchText" type="text" >
+                </li>
+
+                <li>
+                    Limit <input id="limit" type="number" value="1000">
+                </li>
+
+                <li >
+                    <button class="btn btn-sm btn-default" id="submit">Update</button>
+                </li>
+
+                <li>
+                    Color:<input list="colorOption" name="browser" id ="colorText" type="text" >
+                </li>
+
+                  <li>
+                    Sort:
+                    <input list="colorOption" name="browser" id ="sortText" type="text" >
+                </li>
+
+                   <li>
+                   Highlight:
+                    <input list="colorOption" id="highlightText" type="text" >
+
+                </li>
+
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main" style="min-height: 1714px;">
+          <!-- top tiles -->
+          <div class="row tile_count">
+            <div id="count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Total Physicians</span>
+              <div class="count"></div>
+            </div>
+            <div id="Top_100_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Top 100</span>
+              <div class="count"></div>
+            </div>
+            <div id="KOL_national_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> National KOL</span>
+              <div class="count"></div>
+            </div>
+            <div id="KOL_regional_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Regional KOL</span>
+              <div class="count"></div>
+            </div>
+              <div id="KOL_local_count" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-user"></i> Local KOL</span>
+              <div class="count "></div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count legend">
+
+            </div>
+          </div>
+            <div class="row">
+               <div id="grid"></div>
+
+          </div>
+
+
+        </div>
+
+
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+             Project in collaboration <a href="http://entsci.gatech.edu/">http://entsci.gatech.edu/</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+         <datalist id="colorOption">
+             <option value="KOL_Classification">
+            <option value="State">
+            <option value="Pubs_count">
+            <option value="Awards_count">
+            <option value="Certificates_count">
+            <option value="Grants_count">
+            <option value="Memberships_count">
+
+        </datalist>
+    <datalist id="searchOption">
+    <option value="Address">
+        <option value="Alignment_for_Partnership">
+        <option value="Awards_count">
+        <option value="BRV_N_1">
+        <option value="BRV_OL_Investigator">
+        <option value="Certificates_count">
+        <option value="City">
+        <option value="Current_MSL">
+        <option value="Disease_State">
+        <option value="Education">
+        <option value="Elderly">
+        <option value="First_Name">
+        <option value="Grants_count">
+        <option value="Hospital">
+        <option value="Interaction_MSL">
+        <option value="KOL_Classification">
+        <option value="Last_Name">
+        <option value="MSL">
+        <option value="Memberships_count">
+        <option value="Name">
+        <option value="Organization">
+        <option value="Pubs_count">
+        <option value="Reason_for_Unalignment">
+        <option value="Social_Media_Presence">
+        <option value="Specialty">
+        <option value="Strategic_Designation">
+        <option value="Tel">
+        <option value="Territory">
+        <option value="Top_100">
+        <option value="Zip">
+        <option value="city">
+        <option value="state"></option>
+    </datalist>
+
+  <script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/jscroll.min.js')}}"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/grid.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='design/custom.js') }}"></script>
+ <!--<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>-->
+
+</body>
+<!--<body>-->
+    <!---->
+
+    <!--<div style="font-size: 12px;">-->
+        <!--'Address', 'Alignment_for_Partnership', 'Awards', 'Awards_count', 'BRV_N_1', 'BRV_OL_Investigator', 'Certificates', 'Certificates_count', 'City', 'Column_24', 'Column_26', 'Column_27', 'Column_28', 'Comments', 'Current_MSL', 'Disease_State', 'Drop_down_menu_key', 'Education', 'Elderly', 'First_Name', 'Grants', 'Grants_count', 'Hospital', 'Interaction_MSL', 'KOL_Classification', 'Last_Name', 'Location', 'MSL', 'Memberships', 'Memberships_count', 'Name', 'One_Key_ID', 'Organization', 'Pubs', 'Pubs_count', 'Reason_for_Unalignment', 'Similar', 'SimilarURI', 'Social_Media_Presence', 'Specialty', 'State', 'Strategic_Designation', 'Tel', 'Territory', 'Top_100', 'URL', 'Zip', 'city', 'fullname', 'state'-->
+    <!--</div>-->
+    <!--<div id="grid"></div>-->

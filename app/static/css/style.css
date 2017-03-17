@@ -1,0 +1,143 @@
+.links line {
+  stroke: #545454;
+  stroke-opacity: 0.6;
+}
+
+.nodes circle {
+  stroke: #e8e8e8;
+  stroke-width: 1px;
+  opacity:0.9;
+}
+
+.node.selected{
+    stroke: black!important;
+    stroke-width: 2px;
+}
+
+.doc{
+    display: block;
+    float: left;
+   /* border: 1px solid #868686;*/
+    opacity:0.7;
+    background: #ccc;
+    position: relative;
+    margin: 1px 0 0 1px;
+    width:5px;
+    height:5px;
+    cursor:pointer
+}
+
+.doc:hover, .node:hover{
+    background: rgb(70, 70, 70)!important;
+    fill: rgb(70, 70, 70)!important;
+ }
+
+
+.doc.selected,.node.selected{
+  box-shadow: 0 0 0 1px hsl(0, 0%, 0%), 0 0 0 1px hsl(0, 0%, 90%);
+}
+
+input[type='number']{
+     width: 70px;
+}
+.dropdown input[type='number']{
+    position: absolute;
+    right: 0;
+}
+
+.dropdown{
+        display: inline-block;
+}
+
+.dropdown-menu>li>a{
+    display:inline
+}
+
+.dropdown-menu{
+    width: 225px;
+}
+
+div.vis-tooltip{
+    white-space: pre-wrap;
+    width:200px;
+}
+
+.nav.navbar-nav{
+    margin-top:10px;
+}
+
+.title-page{
+    color: #2a3f54;
+    font-size: 18px;
+    /* margin-top: 3px; */
+    margin: 0px 10px;
+}
+
+
+.physician-details{
+    cursor:pointer;
+    color: #969696;
+}
+
+.physician-details.selected span{
+    color:white!important;
+}
+
+
+.physician-details.selected{
+
+color:black;
+}
+
+circle{
+    fill:gray;
+    stroke: gray;
+}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.legend-item{
+    float:left;
+
+}
+
+.legend-item .doc{
+
+    margin: 5px;
+}
+
+
+.legend{
+    max-height: 65px;
+    overflow: scroll;
+}
+
+
+.nav-small input{
+    width: 90px;
+}
+
+
+
+.loader {
+    position:   fixed;
+    z-index:    10000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    display:none;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+        url('/static/images/loading.gif')
+        50% 50%
+        no-repeat;
+}
+
+
+

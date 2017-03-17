@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block options %}
+
+       <li>
+                    Sort:
+                    <input list="sortOption" name="browser" id ="sortText" type="text" >
+                </li>
+
+<datalist id="sortOption">
+         <option value="KOL_Classification">
+        <option value="State">
+        <option value="Pubs_count">
+        <option value="Awards_count">
+        <option value="Certificates_count">
+        <option value="Grants_count">
+        <option value="Memberships_count">
+</datalist>
+{% endblock %}
+
+{% block layout_content %}
+    <div id="grid"></div>
+{% endblock %}
+{% block script_content %}
+     <script type="text/javascript" src="{{ url_for('static', filename='js/grid.js') }}"></script>
+{% endblock %}
+
+{% block d3 %}
+   <script src="https://d3js.org/d3.v4.min.js"></script>
+{% endblock %}
