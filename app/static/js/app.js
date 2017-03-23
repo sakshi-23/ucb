@@ -58,7 +58,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         $("#grid").html('');
         $.ajax({
             type: "GET",
-            url: "static/data/company_list.json",
+            url: "/data/get-all-doctors",
             data: {
                     "search_params": $("#searchText").val(),
                     "limit":$("#limit").val(),
